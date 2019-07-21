@@ -1,1 +1,1 @@
-# stick-it-user-interface
+Stick It User Interface
