@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Apex Mk2";
+  src: url("Fonts/Apex Mk2/ApexMk2-Regular.otf");
+}
+@font-face {
+  font-family: "Octin College Regular";
+  src: url("Fonts/octin college rg.ttf");
+}
+button {
+  background-color: #e4e6eb;
+  border-radius: 3.5px;
+  padding: 10px;
+  color: black;
+  font-family: "Octin College Regular";
+  font-weight: bold;
+  font-size: 20px;
+}
