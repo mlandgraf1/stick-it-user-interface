@@ -6,6 +6,12 @@
   font-family: "Octin College Regular";
   src: url("Fonts/octin college rg.ttf");
 }
+#page-title {
+  font-family: 'Apex Mk2';
+  font-size: 30px;
+  text-align: center;
+  padding-top: 20px;
+}
 button {
   background-color: #e4e6eb;
   border-radius: 3.5px;
