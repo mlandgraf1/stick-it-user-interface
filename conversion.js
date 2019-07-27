@@ -1,6 +1,7 @@
 function getAge() {
     var age = document.getElementById("age");
-    return age;
+    var ageInt = parseInt(age);
+    return ageInt;
 }
 
 function getHeight() {
@@ -17,7 +18,7 @@ function getHeight() {
 function getWeight() {
     var weight = document.getElementById("weight");
     var weightInt = parseInt(weight);
-    return weight;
+    return weightInt;
 }
 
 function getPosition() {
@@ -86,5 +87,43 @@ function findAgeLevel(weightInt, TotalHeight) {
     }
 
     return ageLevel;
+    
+}
+
+var flex;
+
+function findFlex(ageLevel, ageInt, position) {
+    if(ageLevel == "Junior" && ageInt <= 10) {
+        flex = 40;
+    }
+    if(ageLevel == "Junior" && ageInt > 10) {
+        flex = 50;
+    }
+    if(ageLevel == "Intermediate" && ageInt <= 12) {
+        flex = 55;
+    }
+    if(ageLevel == "Intermediate" && ageInt > 12 && ageInt <=15) {
+        flex = 60;
+    }
+    if(ageLevel == "Intermediate" && ageInt > 16) {
+        flex = 65;
+    }
+    if(ageLevel == "Senior" && ageInt <= 18) {
+        flex = 77;
+    }
+    if(ageLevel == "Senior" && ageInt > 18 && ageInt <= 22) {
+        flex = 87;
+    }
+    if(ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
+        flex = 95;
+    }
+    if(ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position =="D") {
+        flex = 102;
+    }
+}
+
+var curve;
+
+function findCurve(position, playingStyle) {
     
 }
