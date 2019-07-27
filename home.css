@@ -16,21 +16,25 @@
   padding-top: 40px;
   background-color: #133160;
 }
-h2 {
+#instructions-header {
   font-family: "Octin College Regular";
   font-weight: bold;
   padding-top: 10px;
+}
+#app-header {
+  font-family: "Octin College Regular";
+  font-weight: bold;
 }
 p {
   font-family: Helvetica;
 }
 img {
   overflow: hidden;
-  height: 400px;
-  width: auto;
+  height: 500px;
+  width: 275px;
 }
 #instructions {
-  height: 100px;
+  height: 120px;
 }
 #button {
   text-align: center;
