@@ -8,14 +8,43 @@
 }
 #page-title {
   font-family: 'Apex Mk2';
-  font-size: 50px;
+  font-size: 60px;
+  color: #e4e6eb;
 }
 #header-column {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 40px;
+  background-color: #133160;
+}
+h2 {
+  font-family: "Octin College Regular";
+  font-weight: bold;
+  padding-top: 10px;
+}
+p {
+  font-family: Helvetica;
+}
+img {
+  overflow: hidden;
+  height: 400px;
+  width: auto;
+}
+#instructions {
+  height: 100px;
+}
+#button {
+  text-align: center;
+}
+#stickit-app {
+  justify-content: center;
 }
 form {
-  border: black solid 1px;
+  border: #133160 solid 5px;
+  width: 550px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .col {
   border: black solid 1px;
@@ -29,4 +58,9 @@ button {
   font-weight: bold;
   font-size: 20px;
   text-align: center;
+}
+label {
+  font-family: "Octin College Regular";
+  font-weight: bold;
+  font-size: 18px;
 }
