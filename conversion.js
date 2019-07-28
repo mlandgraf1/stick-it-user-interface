@@ -125,5 +125,19 @@ function findFlex(ageLevel, ageInt, position) {
 var curve;
 
 function findCurve(position, playingStyle) {
-    
+    if((position == "LW" || position == "C" || position == "RW") && playingStyle == "jackofalltrades") {
+        curve = "P92"
+    }
+    if((position == "LW" || position == "C" || position == "RW") && playingStyle == "playmaker") {
+        curve = "P88"
+    }
+    if((position == "LW" || position == "C" || position == "RW") && playingStyle == "sniper") {
+        curve = "P28"
+    }
+    if(position == "D" && playingStyle == "slapshot"){
+        curve = "P02"
+    }
+    if((position == "LW" || position == "C" || position == "RW") && playingStyle == "dangler") {
+        curve = "P92"
+    }
 }
