@@ -30,26 +30,11 @@ function findAgeLevel() {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
     ageLevel = "Youth";
-  } else if (
-    weightInt >= 120 &&
-    weightInt < 160 &&
-    TotalHeight >= 45 &&
-    TotalHeight < 54
-  ) {
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 45 && TotalHeight < 54) {
     ageLevel = "Junior";
-  } else if (
-    weightInt >= 120 &&
-    weightInt < 160 &&
-    TotalHeight >= 54 &&
-    TotalHeight < 57
-  ) {
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 54 && TotalHeight < 57) {
     ageLevel = "Intermediate";
-  } else if (
-    weightInt >= 120 &&
-    weightInt < 160 &&
-    TotalHeight >= 57 &&
-    TotalHeight < 63
-  ) {
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 57 && TotalHeight < 63) {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
     ageLevel = "Senior";
@@ -65,10 +50,10 @@ function findAgeLevel() {
     ageLevel = "Senior";
   } else if (weightInt >= 160 && TotalHeight >= 63) {
     ageLevel = "Senior";
-  }
+  };
 
   return ageLevel;
-}
+};
 
 var ageLevelParam = findAgeLevel();
 
@@ -97,16 +82,11 @@ function findFlex(ageLevel) {
     flex = 87;
   } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
     flex = 95;
-  } else if (
-    ageLevel == "Senior" &&
-    ageInt > 22 &&
-    ageInt <= 30 &&
-    position == "D"
-  ) {
+  } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
     flex = 102;
-  }
+  };
   return flex;
-}
+};
 
 var flexParam = findFlex(ageLevelParam);
 
@@ -118,30 +98,19 @@ function findCurve() {
   const playingStyle = document.getElementById("playingStyle");
 
   if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "jackofalltrades"
-  ) {
+    (position == "LW" || position == "C" || position == "RW") &&  playingStyle == "jackofalltrades") {
     curve = "P92";
-  } else if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "playmaker"
-  ) {
+  } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "playmaker") {
     curve = "P88";
-  } else if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "sniper"
-  ) {
+  } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "sniper") {
     curve = "P28";
   } else if (position == "D" && playingStyle == "slapshot") {
     curve = "P02";
-  } else if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "dangler"
-  ) {
+  } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "dangler") {
     curve = "P92";
   }
   return curve;
-}
+};
 
 var curveParam = findCurve();
 
