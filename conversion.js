@@ -4,7 +4,7 @@
 
 //get maximum price from user input - turn price into integer
 let maxPrice = document.getElementById("maxPrice");
-const maxPriceInt = parseInt(maxPrice);
+const maxPriceInt = parseFloat(maxPrice);
 
 var ageLevel;
 
@@ -30,11 +30,26 @@ function findAgeLevel() {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
     ageLevel = "Youth";
-  } else if (weightInt >= 120 && weightInt < 160 &&  TotalHeight >= 45 && TotalHeight < 54) {
+  } else if (
+    weightInt >= 120 &&
+    weightInt < 160 &&
+    TotalHeight >= 45 &&
+    TotalHeight < 54
+  ) {
     ageLevel = "Junior";
-  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 54 && TotalHeight < 57) {
+  } else if (
+    weightInt >= 120 &&
+    weightInt < 160 &&
+    TotalHeight >= 54 &&
+    TotalHeight < 57
+  ) {
     ageLevel = "Intermediate";
-  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 57 &&  TotalHeight < 63) {
+  } else if (
+    weightInt >= 120 &&
+    weightInt < 160 &&
+    TotalHeight >= 57 &&
+    TotalHeight < 63
+  ) {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
     ageLevel = "Senior";
@@ -54,6 +69,8 @@ function findAgeLevel() {
 
   return ageLevel;
 }
+
+var ageLevelParam = findAgeLevel();
 
 var flex;
 
@@ -80,11 +97,18 @@ function findFlex(ageLevel) {
     flex = 87;
   } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
     flex = 95;
-  } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
+  } else if (
+    ageLevel == "Senior" &&
+    ageInt > 22 &&
+    ageInt <= 30 &&
+    position == "D"
+  ) {
     flex = 102;
   }
   return flex;
 }
+
+var flexParam = findFlex(ageLevelParam);
 
 var curve;
 
@@ -93,24 +117,38 @@ function findCurve() {
   const position = document.getElementById("position");
   const playingStyle = document.getElementById("playingStyle");
 
-  if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "jackofalltrades") {
+  if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "jackofalltrades"
+  ) {
     curve = "P92";
-  } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "playmaker") {
+  } else if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "playmaker"
+  ) {
     curve = "P88";
-  } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "sniper") {
+  } else if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "sniper"
+  ) {
     curve = "P28";
   } else if (position == "D" && playingStyle == "slapshot") {
     curve = "P02";
-  } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "dangler") {
+  } else if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "dangler"
+  ) {
     curve = "P92";
   }
   return curve;
 }
 
+var curveParam = findCurve();
+
 const hockey = e => {
   e.preventDefault();
 
-  fetch(`/hockey/${flex}/${curve}/${ageLevel}/${maxPriceInt}`, {
+  fetch(`/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${maxPriceInt}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
