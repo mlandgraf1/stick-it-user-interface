@@ -8,7 +8,7 @@ function main() {
 
   //get maximum price from user input - turn price into integer
   let maxPrice = document.getElementById("maxPrice");
-  const maxPriceInt = parseFloat(maxPrice);
+  var maxPriceInt = parseFloat(maxPrice);
 
   var ageLevel;
 
@@ -19,10 +19,10 @@ function main() {
     let heightFeet = document.getElementById("heightFeet");
     let heightInches = document.getElementById("heightInches");
 
-    const heightFeetInt = parseInt(heightFeet);
-    const heightInchesInt = parseInt(heightInches);
+    var heightFeetInt = parseInt(heightFeet);
+    var heightInchesInt = parseInt(heightInches);
 
-    const TotalHeight = heightFeetInt * 12 + heightInchesInt;
+    var TotalHeight = heightFeetInt * 12 + heightInchesInt;
 
     if (weightInt < 120 && TotalHeight < 45) {
       ageLevel = "Youth";
@@ -66,9 +66,9 @@ function main() {
   //use user's age level (determined by last function), age, and position to determine what flex (stiffness) best fits their needs
   function findFlex(ageLevel) {
     let age = document.getElementById("age");
-    const ageInt = parseInt(age);
+    var ageInt = parseInt(age);
 
-    const position = document.getElementById("position");
+    var position = document.getElementById("position");
 
     if (ageLevel == "Junior" && ageInt <= 10) {
       flex = 40;
@@ -98,8 +98,8 @@ function main() {
 
   //use user's position and playing style to determine which stick curve best fits their needs
   function findCurve() {
-    const position = document.getElementById("position");
-    const playingStyle = document.getElementById("playingStyle");
+    var position = document.getElementById("position");
+    var playingStyle = document.getElementById("playingStyle");
 
     if (
       (position == "LW" || position == "C" || position == "RW") &&  playingStyle == "jackofalltrades") {
