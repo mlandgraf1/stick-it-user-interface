@@ -1,3 +1,5 @@
+//function to validate the form to check for empty fields
+//alert appears if a field is left empty
 function validate_form() {
   valid = true;
 
@@ -38,161 +40,144 @@ function validate_form() {
 
   return valid;
 
-}
+};
 
 //This JS file will convert the data entered by the users into the parameters
 //that will be used as part of the GET request
 //The parameters being: flex, curve, ageLevel, price
 
-function main() {
-  //get maximum price from user input - turn price into integer
+
+//get maximum price from user input - turn price into integer
+function findPrice() {
+
   let maxPrice = document.getElementById("maxPrice");
   var maxPriceInt = parseFloat(maxPrice);
 
+  return maxPriceInt;
+};
+
+//use user's weight and height to determine what age level of stick best fits them (Youth/Junior/Intermediate/Senior)
+function findAgeLevel() {
+  let weight = document.getElementById("weight");
+  weightInt = parseInt(weight);
+  let heightFeet = document.getElementById("heightFeet");
+  let heightInches = document.getElementById("heightInches");
+
+  var heightFeetInt = parseInt(heightFeet);
+  var heightInchesInt = parseInt(heightInches);
+
+  var TotalHeight = heightFeetInt * 12 + heightInchesInt;
   var ageLevel;
 
-  //use user's weight and height to determine what age level of stick best fits them (Youth/Junior/Intermediate/Senior)
-  function findAgeLevel() {
-    let weight = document.getElementById("weight");
-    weightInt = parseInt(weight);
-    let heightFeet = document.getElementById("heightFeet");
-    let heightInches = document.getElementById("heightInches");
-
-    var heightFeetInt = parseInt(heightFeet);
-    var heightInchesInt = parseInt(heightInches);
-
-    var TotalHeight = heightFeetInt * 12 + heightInchesInt;
-
-    if (weightInt < 120 && TotalHeight < 45) {
-      ageLevel = "Youth";
-    } else if (weightInt < 120 && TotalHeight >= 45 && TotalHeight < 54) {
-      ageLevel = "Junior";
-    } else if (weightInt < 120 && TotalHeight >= 54 && TotalHeight < 57) {
-      ageLevel = "Junior";
-    } else if (weightInt < 120 && TotalHeight >= 57 && TotalHeight < 63) {
-      ageLevel = "Intermediate";
-    } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
-      ageLevel = "Youth";
-    } else if (
-      weightInt >= 120 &&
-      weightInt < 160 &&
-      TotalHeight >= 45 &&
-      TotalHeight < 54
-    ) {
-      ageLevel = "Junior";
-    } else if (
-      weightInt >= 120 &&
-      weightInt < 160 &&
-      TotalHeight >= 54 &&
-      TotalHeight < 57
-    ) {
-      ageLevel = "Intermediate";
-    } else if (
-      weightInt >= 120 &&
-      weightInt < 160 &&
-      TotalHeight >= 57 &&
-      TotalHeight < 63
-    ) {
-      ageLevel = "Intermediate";
-    } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
-      ageLevel = "Senior";
-    } else if (weightInt < 120 && TotalHeight >= 63) {
-      ageLevel = "Senior";
-    } else if (weightInt >= 160 && TotalHeight < 45) {
-      ageLevel = "Youth";
-    } else if (weightInt >= 160 && TotalHeight >= 45 && TotalHeight < 54) {
-      ageLevel = "Junior";
-    } else if (weightInt >= 160 && TotalHeight >= 54 && TotalHeight < 57) {
-      ageLevel = "Intermediate";
-    } else if (weightInt >= 160 && TotalHeight >= 57 && TotalHeight < 63) {
-      ageLevel = "Senior";
-    } else if (weightInt >= 160 && TotalHeight >= 63) {
-      ageLevel = "Senior";
-    }
-
-    return ageLevel;
+  if (weightInt < 120 && TotalHeight < 45) {
+    ageLevel = "Youth";
+  } else if (weightInt < 120 && TotalHeight >= 45 && TotalHeight < 54) {
+    ageLevel = "Junior";
+  } else if (weightInt < 120 && TotalHeight >= 54 && TotalHeight < 57) {
+    ageLevel = "Junior";
+  } else if (weightInt < 120 && TotalHeight >= 57 && TotalHeight < 63) {
+    ageLevel = "Intermediate";
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
+    ageLevel = "Youth";
+  } else if (weightInt >= 120 &&  weightInt < 160 && TotalHeight >= 45 && TotalHeight < 54) {
+    ageLevel = "Junior";
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 54 && TotalHeight < 57) {
+    ageLevel = "Intermediate";
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 57 && TotalHeight < 63) {
+    ageLevel = "Intermediate";
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
+    ageLevel = "Senior";
+  } else if (weightInt < 120 && TotalHeight >= 63) {
+    ageLevel = "Senior";
+  } else if (weightInt >= 160 && TotalHeight < 45) {
+    ageLevel = "Youth";
+  } else if (weightInt >= 160 && TotalHeight >= 45 && TotalHeight < 54) {
+    ageLevel = "Junior";
+  } else if (weightInt >= 160 && TotalHeight >= 54 && TotalHeight < 57) {
+    ageLevel = "Intermediate";
+  } else if (weightInt >= 160 && TotalHeight >= 57 && TotalHeight < 63) {
+    ageLevel = "Senior";
+  } else if (weightInt >= 160 && TotalHeight >= 63) {
+    ageLevel = "Senior";
   }
 
-  var ageLevelParam = findAgeLevel();
+  return ageLevel;
+}
 
+//use user's age level (determined by last function), age, and position to determine what flex (stiffness) best fits their needs
+function findFlex(ageLevel) {
+  let age = document.getElementById("age");
+  var ageInt = parseInt(age);
+
+  var position = document.getElementById("position");
   var flex;
 
-  //use user's age level (determined by last function), age, and position to determine what flex (stiffness) best fits their needs
-  function findFlex(ageLevel) {
-    let age = document.getElementById("age");
-    var ageInt = parseInt(age);
-
-    var position = document.getElementById("position");
-
-    if (ageLevel == "Junior" && ageInt <= 10) {
-      flex = 40;
-    } else if (ageLevel == "Junior" && ageInt > 10) {
-      flex = 50;
-    } else if (ageLevel == "Intermediate" && ageInt <= 12) {
-      flex = 55;
-    } else if (ageLevel == "Intermediate" && ageInt > 12 && ageInt <= 15) {
-      flex = 60;
-    } else if (ageLevel == "Intermediate" && ageInt > 16) {
-      flex = 65;
-    } else if (ageLevel == "Senior" && ageInt <= 18) {
-      flex = 77;
-    } else if (ageLevel == "Senior" && ageInt > 18 && ageInt <= 22) {
-      flex = 87;
-    } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
-      flex = 95;
-    } else if (
-      ageLevel == "Senior" &&
-      ageInt > 22 &&
-      ageInt <= 30 &&
-      position == "D"
-    ) {
-      flex = 102;
-    }
-    return flex;
+  if (ageLevel == "Junior" && ageInt <= 10) {
+    flex = 40;
+  } else if (ageLevel == "Junior" && ageInt > 10) {
+    flex = 50;
+  } else if (ageLevel == "Intermediate" && ageInt <= 12) {
+    flex = 55;
+  } else if (ageLevel == "Intermediate" && ageInt > 12 && ageInt <= 15) {
+    flex = 60;
+  } else if (ageLevel == "Intermediate" && ageInt > 16) {
+    flex = 65;
+  } else if (ageLevel == "Senior" && ageInt <= 18) {
+    flex = 77;
+  } else if (ageLevel == "Senior" && ageInt > 18 && ageInt <= 22) {
+    flex = 87;
+  } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
+    flex = 95;
+  } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
+    flex = 102;
   }
+  return flex;
+}
 
-  var flexParam = findFlex(ageLevelParam);
+//use user's position and playing style to determine which stick curve best fits their needs
+function findCurve() {
+  var position = document.getElementById("position");
+  var playingStyle = document.getElementById("playingStyle");
 
   var curve;
 
-  //use user's position and playing style to determine which stick curve best fits their needs
-  function findCurve() {
-    var position = document.getElementById("position");
-    var playingStyle = document.getElementById("playingStyle");
-
-    if (
-      (position == "LW" || position == "C" || position == "RW") &&
-      playingStyle == "jackofalltrades"
-    ) {
-      curve = "P92";
-    } else if (
-      (position == "LW" || position == "C" || position == "RW") &&
-      playingStyle == "playmaker"
-    ) {
-      curve = "P88";
-    } else if (
-      (position == "LW" || position == "C" || position == "RW") &&
-      playingStyle == "sniper"
-    ) {
-      curve = "P28";
-    } else if (position == "D" && playingStyle == "slapshot") {
-      curve = "P02";
-    } else if (
-      (position == "LW" || position == "C" || position == "RW") &&
-      playingStyle == "dangler"
-    ) {
-      curve = "P92";
-    }
-    return curve;
+  if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "jackofalltrades"
+  ) {
+    curve = "P92";
+  } else if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "playmaker"
+  ) {
+    curve = "P88";
+  } else if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "sniper"
+  ) {
+    curve = "P28";
+  } else if (position == "D" && playingStyle == "slapshot") {
+    curve = "P02";
+  } else if (
+    (position == "LW" || position == "C" || position == "RW") &&
+    playingStyle == "dangler"
+  ) {
+    curve = "P92";
   }
+  return curve;
+}
 
+function fireGetRequest(){
+  var ageLevelParam = findAgeLevel();
+  var flexParam = findFlex(ageLevelParam);
   var curveParam = findCurve();
+  var priceParam = findPrice();
 
   const hockey = e => {
     e.preventDefault();
 
     fetch(
-      `/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${maxPriceInt}`,
+      `/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${priceParam}`,
       {
         method: "GET",
         headers: {
@@ -206,4 +191,4 @@ function main() {
   };
 
   document.getElementById("submit").addEventListener("click", hockey);
-}
+};
