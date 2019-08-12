@@ -1,11 +1,50 @@
+function validate_form() {
+  valid = true;
+
+  if (document.form.age.value == "") {
+    alert("Please fill in the Age field.");
+    valid = false;
+  }
+
+  if (document.form.heightFeet.selectedIndex == 0) {
+    alert("Please fill in the Height field.");
+    valid = false;
+  }
+
+  if (document.form.heightInches.selectedIndex == 0) {
+    alert("Please fill in the Height field.");
+    valid = false;
+  }
+
+  if (document.form.weight.value == "") {
+    alert("Please fill in the Weight field.");
+    valid = false;
+  }
+
+  if (document.form.position.selectedIndex == 0) {
+    alert("Please fill in the Position field.");
+    valid = false;
+  }
+
+  if (document.form.playingStyle.selectedIndex == 0) {
+    alert("Please fill in the Playing Style field.");
+    valid = false;
+  }
+
+  if (document.form.heightInches.selectedIndex == 0) {
+    alert("Please fill in the Maximum Price field.");
+    valid = false;
+  }
+
+  return valid;
+
+}
+
 //This JS file will convert the data entered by the users into the parameters
 //that will be used as part of the GET request
 //The parameters being: flex, curve, ageLevel, price
 
-
 function main() {
-
-
   //get maximum price from user input - turn price into integer
   let maxPrice = document.getElementById("maxPrice");
   var maxPriceInt = parseFloat(maxPrice);
@@ -34,11 +73,26 @@ function main() {
       ageLevel = "Intermediate";
     } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
       ageLevel = "Youth";
-    } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 45 && TotalHeight < 54) {
+    } else if (
+      weightInt >= 120 &&
+      weightInt < 160 &&
+      TotalHeight >= 45 &&
+      TotalHeight < 54
+    ) {
       ageLevel = "Junior";
-    } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 54 && TotalHeight < 57) {
+    } else if (
+      weightInt >= 120 &&
+      weightInt < 160 &&
+      TotalHeight >= 54 &&
+      TotalHeight < 57
+    ) {
       ageLevel = "Intermediate";
-    } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 57 && TotalHeight < 63) {
+    } else if (
+      weightInt >= 120 &&
+      weightInt < 160 &&
+      TotalHeight >= 57 &&
+      TotalHeight < 63
+    ) {
       ageLevel = "Intermediate";
     } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
       ageLevel = "Senior";
@@ -54,10 +108,10 @@ function main() {
       ageLevel = "Senior";
     } else if (weightInt >= 160 && TotalHeight >= 63) {
       ageLevel = "Senior";
-    };
+    }
 
     return ageLevel;
-  };
+  }
 
   var ageLevelParam = findAgeLevel();
 
@@ -86,11 +140,16 @@ function main() {
       flex = 87;
     } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
       flex = 95;
-    } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
+    } else if (
+      ageLevel == "Senior" &&
+      ageInt > 22 &&
+      ageInt <= 30 &&
+      position == "D"
+    ) {
       flex = 102;
-    };
+    }
     return flex;
-  };
+  }
 
   var flexParam = findFlex(ageLevelParam);
 
@@ -102,35 +161,49 @@ function main() {
     var playingStyle = document.getElementById("playingStyle");
 
     if (
-      (position == "LW" || position == "C" || position == "RW") &&  playingStyle == "jackofalltrades") {
+      (position == "LW" || position == "C" || position == "RW") &&
+      playingStyle == "jackofalltrades"
+    ) {
       curve = "P92";
-    } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "playmaker") {
+    } else if (
+      (position == "LW" || position == "C" || position == "RW") &&
+      playingStyle == "playmaker"
+    ) {
       curve = "P88";
-    } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "sniper") {
+    } else if (
+      (position == "LW" || position == "C" || position == "RW") &&
+      playingStyle == "sniper"
+    ) {
       curve = "P28";
     } else if (position == "D" && playingStyle == "slapshot") {
       curve = "P02";
-    } else if ((position == "LW" || position == "C" || position == "RW") && playingStyle == "dangler") {
+    } else if (
+      (position == "LW" || position == "C" || position == "RW") &&
+      playingStyle == "dangler"
+    ) {
       curve = "P92";
     }
     return curve;
-  };
+  }
 
   var curveParam = findCurve();
 
   const hockey = e => {
     e.preventDefault();
 
-    fetch(`/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${maxPriceInt}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json"
+    fetch(
+      `/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${maxPriceInt}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json"
+        }
       }
-    })
+    )
       .then(res => res.json())
       .then(res => console.log(res))
       .catch(err => console.log("error fetching data", err));
   };
 
   document.getElementById("submit").addEventListener("click", hockey);
-};
+}
