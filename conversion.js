@@ -39,29 +39,26 @@ function validate_form() {
   }
 
   return valid;
-
-};
+}
 
 //This JS file will convert the data entered by the users into the parameters
 //that will be used as part of the GET request
 //The parameters being: flex, curve, ageLevel, price
 
-
-//get maximum price from user input - turn price into integer
+//get maximum price from user input - turn price into float
 function findPrice() {
+  let maxPrice = document.getElementById("maxPrice").value;
+  var maxPriceFloat = parseFloat(maxPrice);
 
-  let maxPrice = document.getElementById("maxPrice");
-  var maxPriceInt = parseFloat(maxPrice);
-
-  return maxPriceInt;
-};
+  return maxPriceFloat;
+}
 
 //use user's weight and height to determine what age level of stick best fits them (Youth/Junior/Intermediate/Senior)
 function findAgeLevel() {
-  let weight = document.getElementById("weight");
+  let weight = document.getElementById("weight").value;
   weightInt = parseInt(weight);
-  let heightFeet = document.getElementById("heightFeet");
-  let heightInches = document.getElementById("heightInches");
+  let heightFeet = document.getElementById("heightFeet").value;
+  let heightInches = document.getElementById("heightInches").value;
 
   var heightFeetInt = parseInt(heightFeet);
   var heightInchesInt = parseInt(heightInches);
@@ -79,11 +76,26 @@ function findAgeLevel() {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
     ageLevel = "Youth";
-  } else if (weightInt >= 120 &&  weightInt < 160 && TotalHeight >= 45 && TotalHeight < 54) {
+  } else if (
+    weightInt >= 120 &&
+    weightInt < 160 &&
+    TotalHeight >= 45 &&
+    TotalHeight < 54
+  ) {
     ageLevel = "Junior";
-  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 54 && TotalHeight < 57) {
+  } else if (
+    weightInt >= 120 &&
+    weightInt < 160 &&
+    TotalHeight >= 54 &&
+    TotalHeight < 57
+  ) {
     ageLevel = "Intermediate";
-  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 57 && TotalHeight < 63) {
+  } else if (
+    weightInt >= 120 &&
+    weightInt < 160 &&
+    TotalHeight >= 57 &&
+    TotalHeight < 63
+  ) {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
     ageLevel = "Senior";
@@ -106,10 +118,10 @@ function findAgeLevel() {
 
 //use user's age level (determined by last function), age, and position to determine what flex (stiffness) best fits their needs
 function findFlex(ageLevel) {
-  let age = document.getElementById("age");
+  let age = document.getElementById("age").value;
   var ageInt = parseInt(age);
 
-  var position = document.getElementById("position");
+  var position = document.getElementById("position").value;
   var flex;
 
   if (ageLevel == "Junior" && ageInt <= 10) {
@@ -128,7 +140,12 @@ function findFlex(ageLevel) {
     flex = 87;
   } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
     flex = 95;
-  } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
+  } else if (
+    ageLevel == "Senior" &&
+    ageInt > 22 &&
+    ageInt <= 30 &&
+    position == "D"
+  ) {
     flex = 102;
   }
   return flex;
@@ -136,8 +153,8 @@ function findFlex(ageLevel) {
 
 //use user's position and playing style to determine which stick curve best fits their needs
 function findCurve() {
-  var position = document.getElementById("position");
-  var playingStyle = document.getElementById("playingStyle");
+  var position = document.getElementById("position").value;
+  var playingStyle = document.getElementById("playingStyle").value;
 
   var curve;
 
@@ -167,28 +184,45 @@ function findCurve() {
   return curve;
 }
 
-function fireGetRequest(){
+function fireGetRequest(event) {
+  event.preventDefault();
+  validate_form();
+  console.log("Hey!!!! Got here!");
+
   var ageLevelParam = findAgeLevel();
   var flexParam = findFlex(ageLevelParam);
   var curveParam = findCurve();
   var priceParam = findPrice();
+  // alert(ageLevelParam);
+  // alert(flexParam);
+  // alert(curveParam);
+  // alert(priceParam);
 
-  const hockey = e => {
-    e.preventDefault();
+  fetch(`/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${priceParam}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      const dataDisplay = document.getElementById("data");
+      renderData(res, dataDisplay);
+    })
+    .catch(err => console.log("error fetching data", err));
 
-    fetch(
-      `/hockey/${flexParam}/${curveParam}/${ageLevelParam}/${priceParam}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json"
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log("error fetching data", err));
-  };
+    this.disabled = true;
+    this.style.color = "gray";
+}
 
-  document.getElementById("submit").addEventListener("click", hockey);
+const renderData = (data, dataDisplay) => {
+  data.forEach(d => {
+    let listWrapper = document.createElement("ul");
+    listWrapper.innerHTML = `<li>${d.name}</li>
+    <li>${d.flex}</li>`;
+    dataDisplay.append(listWrapper);
+  });
 };
+
+document.getElementById("submit").addEventListener("click", fireGetRequest);
