@@ -76,26 +76,11 @@ function findAgeLevel() {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight < 45) {
     ageLevel = "Youth";
-  } else if (
-    weightInt >= 120 &&
-    weightInt < 160 &&
-    TotalHeight >= 45 &&
-    TotalHeight < 54
-  ) {
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 45 && TotalHeight < 54) {
     ageLevel = "Junior";
-  } else if (
-    weightInt >= 120 &&
-    weightInt < 160 &&
-    TotalHeight >= 54 &&
-    TotalHeight < 57
-  ) {
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 54 && TotalHeight < 57) {
     ageLevel = "Intermediate";
-  } else if (
-    weightInt >= 120 &&
-    weightInt < 160 &&
-    TotalHeight >= 57 &&
-    TotalHeight < 63
-  ) {
+  } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 57 && TotalHeight < 63) {
     ageLevel = "Intermediate";
   } else if (weightInt >= 120 && weightInt < 160 && TotalHeight >= 63) {
     ageLevel = "Senior";
@@ -124,9 +109,9 @@ function findFlex(ageLevel) {
   var position = document.getElementById("position").value;
   var flex;
 
-  if (ageLevel == "Junior" && ageInt <= 10) {
+  if (ageLevel == "Junior" && ageInt >= 8 && ageInt <= 10) {
     flex = 40;
-  } else if (ageLevel == "Junior" && ageInt > 10) {
+  } else if (ageLevel == "Junior" && ageInt > 10 && ageInt <= 12) {
     flex = 50;
   } else if (ageLevel == "Intermediate" && ageInt <= 12) {
     flex = 55;
@@ -140,12 +125,7 @@ function findFlex(ageLevel) {
     flex = 87;
   } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30) {
     flex = 95;
-  } else if (
-    ageLevel == "Senior" &&
-    ageInt > 22 &&
-    ageInt <= 30 &&
-    position == "D"
-  ) {
+  } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
     flex = 102;
   }
   return flex;
@@ -187,7 +167,6 @@ function findCurve() {
 function fireGetRequest(event) {
   event.preventDefault();
   validate_form();
-  console.log("Hey!!!! Got here!");
 
   var ageLevelParam = findAgeLevel();
   var flexParam = findFlex(ageLevelParam);
@@ -218,9 +197,14 @@ function fireGetRequest(event) {
 
 const renderData = (data, dataDisplay) => {
   data.forEach(d => {
-    let listWrapper = document.createElement("ul");
-    listWrapper.innerHTML = `<li>${d.name}</li>
-    <li>${d.flex}</li>`;
+    let listWrapper = document.createElement("div");
+    listWrapper.innerHTML = `<h2 id="results-header">Results</h2>
+    <p id="results">Name: </p><p>${d.name}</p>
+    <p id="results">Age Level: </p><p>${d.agelevel}</p>
+    <p id="results">Flex: </p><p>${d.flex}</p>
+    <p id="results">Curve: </p><p>${d.curve}</p>
+    <p id="results">Price: </p><p>$${d.price}</p>
+    <p id="results">Buy Here: </p><p>${d.purchaselink}</p>`;
     dataDisplay.append(listWrapper);
   });
 };

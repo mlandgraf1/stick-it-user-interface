@@ -25,6 +25,13 @@
   font-family: "Octin College Regular";
   font-weight: bold;
 }
+
+#results-header {
+  font-family: "Octin College Regular";
+  font-weight: bold;
+  padding-top: 10px;
+}
+
 p {
   font-family: Helvetica;
 }
@@ -64,6 +71,12 @@ button {
   text-align: center;
 }
 label {
+  font-family: "Octin College Regular";
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#results {
   font-family: "Octin College Regular";
   font-weight: bold;
   font-size: 18px;
