@@ -56,7 +56,7 @@ function findPrice() {
 //use user's weight and height to determine what age level of stick best fits them (Youth/Junior/Intermediate/Senior)
 function findAgeLevel() {
   let weight = document.getElementById("weight").value;
-  weightInt = parseInt(weight);
+  weightInt = parseFloat(weight);
   let heightFeet = document.getElementById("heightFeet").value;
   let heightInches = document.getElementById("heightInches").value;
 
@@ -104,7 +104,7 @@ function findAgeLevel() {
 //use user's age level (determined by last function), age, and position to determine what flex (stiffness) best fits their needs
 function findFlex(ageLevel) {
   let age = document.getElementById("age").value;
-  var ageInt = parseInt(age);
+  var ageInt = parseFloat(age);
 
   var position = document.getElementById("position").value;
   var flex;
@@ -190,14 +190,19 @@ function fireGetRequest(event) {
 const renderData = (data, dataDisplay) => {
   data.forEach(d => {
     let listWrapper = document.createElement("div");
-    listWrapper.innerHTML = `<h2 id="results-header">Results</h2>
-    <p id="results">Name: </p><p>${d.name}</p>
-    <p id="results">Age Level: </p><p>${d.agelevel}</p>
-    <p id="results">Flex: </p><p>${d.flex}</p>
-    <p id="results">Curve: </p><p>${d.curve}</p>
-    <p id="results">Price: </p><p>$${d.price}</p>
-    <form id="buyNow" action="${d.purchaselink}" target="_blank">
-      <button type="submit">Buy Now</button>
+    listWrapper.innerHTML = 
+    `<form id="results" action="${d.purchaselink}" target="_blank">
+        <div id="name-div">
+        <label for="name">Name: </label><p id="name" name="name">${d.name}</p></div>
+        <div id="age-level-div">
+        <label for="age-level">Age Level: </label><p id="age-level" name="age-level">${d.agelevel}</p></div>
+        <div id="flex-div">
+        <label for="flex">Flex: </label><p id="flex" name="flex">${d.flex}</p></div>
+        <div id="curve-div">
+        <label for="curve">Curve: </label><p id="curve" name="curve">${d.curve}</p></div>
+        <div id="price-div">
+        <label for="price">Price: </label><p id="price" name="price">$${d.price}</p></div>
+        <button type="submit">Buy Now</button>
     </form>`;
     dataDisplay.append(listWrapper);
   });

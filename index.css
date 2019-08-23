@@ -51,9 +51,6 @@ form {
   padding-right: 20px;
   margin-bottom: 10px;
 }
-#buyNow {
-  border: none;
-}
 .col {
   border: black solid 1px;
 }
@@ -77,8 +74,14 @@ label {
   font-weight: bold;
   padding-top: 10px;
 }
-#results {
-  font-family: "Octin College Regular";
-  font-weight: bold;
-  font-size: 18px;
+#results label {
+  padding-right: 10px;
+}
+#name-div,
+#age-level-div,
+#flex-div,
+#curve-div,
+#price-div {
+  display: flex;
+  flex-direction: row;
 }
