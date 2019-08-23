@@ -94,7 +94,7 @@ function findAgeLevel() {
     ageLevel = "Intermediate";
   } else if (weightInt >= 160 && TotalHeight >= 57 && TotalHeight < 63) {
     ageLevel = "Senior";
-  } else if (weightInt >= 160 && TotalHeight >= 63) {
+  } else {
     ageLevel = "Senior";
   }
 
@@ -109,9 +109,9 @@ function findFlex(ageLevel) {
   var position = document.getElementById("position").value;
   var flex;
 
-  if (ageLevel == "Junior" && ageInt >= 8 && ageInt <= 10) {
+  if (ageLevel == "Junior" && ageInt <= 10) {
     flex = 40;
-  } else if (ageLevel == "Junior" && ageInt > 10 && ageInt <= 12) {
+  } else if (ageLevel == "Junior" && ageInt > 10) {
     flex = 50;
   } else if (ageLevel == "Intermediate" && ageInt <= 12) {
     flex = 55;
@@ -127,6 +127,8 @@ function findFlex(ageLevel) {
     flex = 95;
   } else if (ageLevel == "Senior" && ageInt > 22 && ageInt <= 30 && position == "D") {
     flex = 102;
+  } else if (ageLevel == "Senior" && ageInt > 30) {
+    flex = 87;
   }
   return flex;
 }
@@ -138,28 +140,18 @@ function findCurve() {
 
   var curve;
 
-  if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "jackofalltrades"
-  ) {
-    curve = "P92";
-  } else if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "playmaker"
-  ) {
+  if (playingStyle == "jackofalltrades") {
     curve = "P88";
-  } else if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "sniper"
-  ) {
+  } else if (playingStyle == "playmaker") {
+    curve = "P88";
+  } else if (playingStyle == "sniper") {
     curve = "P28";
-  } else if (position == "D" && playingStyle == "slapshot") {
-    curve = "P02";
-  } else if (
-    (position == "LW" || position == "C" || position == "RW") &&
-    playingStyle == "dangler"
-  ) {
+  } else if (playingStyle == "slapshot" || playingStyle == "jackofalltrades" && position == "D") {
+    curve = "PM9";
+  } else if (playingStyle == "dangler") {
     curve = "P92";
+  } else {
+    curve = "P88";
   }
   return curve;
 }
@@ -204,7 +196,9 @@ const renderData = (data, dataDisplay) => {
     <p id="results">Flex: </p><p>${d.flex}</p>
     <p id="results">Curve: </p><p>${d.curve}</p>
     <p id="results">Price: </p><p>$${d.price}</p>
-    <p id="results">Buy Here: </p><p>${d.purchaselink}</p>`;
+    <form id="buyNow" action="${d.purchaselink}" target="_blank">
+      <button type="submit">Buy Now</button>
+    </form>`;
     dataDisplay.append(listWrapper);
   });
 };

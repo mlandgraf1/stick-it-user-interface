@@ -25,13 +25,6 @@
   font-family: "Octin College Regular";
   font-weight: bold;
 }
-
-#results-header {
-  font-family: "Octin College Regular";
-  font-weight: bold;
-  padding-top: 10px;
-}
-
 p {
   font-family: Helvetica;
 }
@@ -56,6 +49,10 @@ form {
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-bottom: 10px;
+}
+#buyNow {
+  border: none;
 }
 .col {
   border: black solid 1px;
@@ -75,7 +72,11 @@ label {
   font-weight: bold;
   font-size: 18px;
 }
-
+#results-header {
+  font-family: "Octin College Regular";
+  font-weight: bold;
+  padding-top: 10px;
+}
 #results {
   font-family: "Octin College Regular";
   font-weight: bold;
