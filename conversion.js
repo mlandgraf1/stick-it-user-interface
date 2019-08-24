@@ -178,8 +178,13 @@ function fireGetRequest(event) {
     .then(res => res.json())
     .then(res => {
       console.log(res);
-      const dataDisplay = document.getElementById("data");
-      renderData(res, dataDisplay);
+      if(res.errorMsg){
+        const error = document.getElementById("data");
+        error.innerHTML = `<h2 id="results-header">Results</h2><p id="error">${res.errorMsg}</p>`;
+      }else{
+        const dataDisplay = document.getElementById("data");
+        renderData(res, dataDisplay);
+      }
     })
     .catch(err => console.log("error fetching data", err));
 
